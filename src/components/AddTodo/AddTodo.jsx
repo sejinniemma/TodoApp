@@ -1,25 +1,22 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
-const AddTodo = ({ onHandleAdd }) => {
-  const [text, setText] = useState('');
-
-  // 렌더링되면서 useState를 사용해주지 않아서 값이 저장되지 않았음.
-  const handleAdd = (e) => {
-    setText(e.target.value);
-  };
+const AddTodo = ({ onAdd }) => {
+  const inputRef = useRef();
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (text == '') {
+    const value = inputRef.current.value;
+    if (value == '') {
       return;
     }
-    onHandleAdd({ id: Date.now(), text, status: 'active' });
-    setText('');
+    onAdd({ id: uuidv4(), text: value, status: 'active' });
+    inputRef.current.value = '';
   };
 
   return (
     <form onSubmit={onSubmit}>
-      <input value={text} type='text' onChange={handleAdd} />
+      <input ref={inputRef} type='text' />
       <button>Add</button>
     </form>
   );

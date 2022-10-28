@@ -6,16 +6,24 @@ import styles from './TodoList.module.css';
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
-  const onHandleAdd = (value) => setTodos([...todos, value]);
-
+  const handleAdd = (value) => setTodos([...todos, value]);
+  const handleUpdate = (updated) =>
+    setTodos(todos.map((todo) => (todo.id === updated.id ? updated : todo)));
+  const handleDelete = (deleted) =>
+    setTodos(todos.filter((todo) => todo.id !== deleted.id));
   return (
     <>
       <ul>
         {todos.map((todo) => (
-          <Todo key={todo.id} list={todo.text} />
+          <Todo
+            key={todo.id}
+            todo={todo}
+            onUpdate={handleUpdate}
+            onDelete={handleDelete}
+          />
         ))}
       </ul>
-      <AddTodo onHandleAdd={onHandleAdd} />
+      <AddTodo onAdd={handleAdd} />
     </>
   );
 };

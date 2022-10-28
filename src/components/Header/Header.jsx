@@ -1,13 +1,21 @@
 import React from 'react';
+import { HiSun } from 'react-icons/hi';
+import styles from './Header.module.css';
 
-const Header = (props) => {
+const Header = ({ filters, filter, onFilterChange }) => {
   return (
-    <div>
-      <button>🌓</button>
-      <span>All</span>
-      <span>Active</span>
-      <span>Completed</span>
-    </div>
+    <header>
+      <button>
+        <HiSun />
+      </button>
+      <ul>
+        {filters.map((value, index) => (
+          <li key={index}>
+            <button onClick={() => onFilterChange(value)}>{value}</button>
+          </li>
+        ))}
+      </ul>
+    </header>
   );
 };
 

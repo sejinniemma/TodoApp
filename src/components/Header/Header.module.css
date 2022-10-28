@@ -1,0 +1,8 @@
+button {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  transform: scale(1.1);
+}

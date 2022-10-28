@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaTrashAlt } from 'react-icons/fa';
 
-const Todo = ({ todo, onUpdate, onDelete }) => {
+const Todo = ({ filter, todo, onUpdate, onDelete }) => {
   const { text, status } = todo;
 
   const handleChange = (e) => {
@@ -9,9 +9,7 @@ const Todo = ({ todo, onUpdate, onDelete }) => {
     onUpdate({ ...todo, status });
   };
 
-  const handleDelete = () => {
-    onDelete(todo);
-  };
+  const handleDelete = () => onDelete(todo);
 
   return (
     <li>

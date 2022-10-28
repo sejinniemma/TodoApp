@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import styles from './AddTodo.module.css';
 
 const AddTodo = ({ onAdd }) => {
   const inputRef = useRef();
@@ -15,9 +16,9 @@ const AddTodo = ({ onAdd }) => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <input ref={inputRef} type='text' />
-      <button>Add</button>
+    <form className={styles.form} onSubmit={onSubmit}>
+      <input className={styles.input} ref={inputRef} type='text' />
+      <button className={styles.button}>Add</button>
     </form>
   );
 };

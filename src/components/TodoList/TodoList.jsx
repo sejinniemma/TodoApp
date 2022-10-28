@@ -15,8 +15,8 @@ const TodoList = ({ filter }) => {
   const filtered = getFilteredItems(todos, filter);
 
   return (
-    <>
-      <ul>
+    <div className={styles.container}>
+      <ul className={styles.list}>
         {filtered.map((todo) => (
           <Todo
             key={todo.id}
@@ -28,7 +28,7 @@ const TodoList = ({ filter }) => {
         ))}
       </ul>
       <AddTodo onAdd={handleAdd} />
-    </>
+    </div>
   );
 };
 export default TodoList;

@@ -2,8 +2,9 @@ import React from 'react';
 import { FaTrashAlt } from 'react-icons/fa';
 import styles from './Todo.module.css';
 
-const Todo = ({ filter, todo, onUpdate, onDelete }) => {
+const Todo = ({ darkMode, filter, todo, onUpdate, onDelete }) => {
   const { text, status } = todo;
+  const dark = darkMode ? styles.dark : '';
 
   const handleChange = (e) => {
     const status = e.target.checked ? 'completed' : 'active';

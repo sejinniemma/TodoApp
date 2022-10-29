@@ -8,7 +8,7 @@ const AddTodo = ({ onAdd }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const value = inputRef.current.value;
-    if (value == '') {
+    if (value === '') {
       return;
     }
     onAdd({ id: uuidv4(), text: value, status: 'active' });

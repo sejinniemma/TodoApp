@@ -1,12 +1,12 @@
 import React from 'react';
 import Todo from '../Todo/Todo';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AddTodo from '../AddTodo/AddTodo';
 import styles from './TodoList.module.css';
 import { useDarkMode } from '../../context/DarkModeContext';
 
 const TodoList = ({ filter }) => {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => readTodo());
   const { darkMode, toggleDarkMode } = useDarkMode();
 
   const handleAdd = (value) => setTodos([...todos, value]);
@@ -16,6 +16,10 @@ const TodoList = ({ filter }) => {
     setTodos(todos.filter((todo) => todo.id !== deleted.id));
 
   const filtered = getFilteredItems(todos, filter);
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <div className={styles.container}>
@@ -36,6 +40,11 @@ const TodoList = ({ filter }) => {
   );
 };
 export default TodoList;
+
+function readTodo() {
+  const todos = localStorage.getItem('todos');
+  return todos ? JSON.parse(todos) : [];
+}
 
 function getFilteredItems(todos, filter) {
   if (filter === 'all') {
